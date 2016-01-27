@@ -32,7 +32,7 @@ public class Fxtest extends Application{
 		Label l2 = new Label("年");
 		tf1 = new TextField();
 		ObservableList<String> data = FXCollections.observableArrayList(
-                "平成","昭和","大正"
+                "西暦","平成","昭和","大正"
         );
 		cb1 = new ComboBox<String>(data);
 		b1 = new Button("Click!");
@@ -58,6 +58,28 @@ public class Fxtest extends Application{
 		int wareki = Integer.parseInt(input);
 		int seireki = 0;
 		switch(cb1.getValue()){
+		case "西暦":
+			if(wareki>1988 && wareki<2017){
+				if(wareki ==1989){
+					return "平成元年 昭和64年";
+				}
+				int heisei = wareki-1988;
+				return "平成"+heisei+"年";
+			}else if(wareki>1925 && wareki<1989){
+				if(wareki == 1926){
+					return "昭和元年 大正15年";
+				}
+				int showa = wareki - 1925;
+				return "昭和"+showa+"年";
+			}else if(wareki>1911 && wareki<1927){
+				if(wareki == 1912){
+					return "大正元年";
+				}
+				int taisho = wareki - 1911;
+				return "大正"+taisho+"年";
+			}else{
+				return "大正～平成の間で入力してください。";
+			}
 		case "平成":
 			if(wareki<28){
 				seireki = wareki + 1988;
@@ -76,7 +98,7 @@ public class Fxtest extends Application{
 			if(wareki<16){
 				seireki = wareki + 1911;
 			}else{
-				return "間違った入力です";
+				return "間違った数字です";
 			}
 			break;
 		}
